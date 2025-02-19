@@ -1,0 +1,24 @@
+Submission Report: Students should submit a report that includes:
+1. A description of the Book and Library classes.
+2. An explanation of the methods implemented, especially the new addBook method.
+3. Sample input/output from the program.
+4. Any additional features implemented.
+
+1. The Book class has 3 parameters in the constructor - title, author, and isBorrowed, which are type String, String, and Boolean respectively. 
+
+The Library class has one parameter in the constructor, an array of type Book.
+
+2. The Book class has 2 Getter methods for getting the title and author, it has a borrowBook method that sets the Book's isBorrowed Boolean to true, it has a returnBook method that sets the Book's isBorrowed Boolean to false, and a toString method to print the title, author, and availability of the book.
+
+The Library class has a method borrowBook (which takes in a title and if that book exists in the library, calls the book's borrowBook method), a method returnBook (which does the exact opposite of borrowBook), a method listBooks (to display all the library books and their info by printing the toString of every book in the library), a method isLibraryFull (that I created myself to see if the library array is full), addBook (which checks to see if the library is full using isLibraryFull, then if it is, modifies the array's length and adds the book either way), searchByTitle (loops through the library array to see if a book taken in as a parameter exists in the library and returns the book found if one is), searchByAuthor (which returns every book with an author that matches the one taken in as a parameter), and countAvailableBooks (which loops through the library with a counter variable and returns the result).
+
+3. There was this line in the program:
+System.out.println(myLibrary.searchByAuthor("George Orwell");
+
+And this was displayed:
+Books by George Orwell:
+[Title: 1984, Author: George Orwell, Borrowed: false, Title: Animal Farm, Author: George Orwell, Borrowed: false, Title: Burmese Days, Author: George Orwell, Borrowed: false, Title: Homage to Catalonia, Author: George Orwell, Borrowed: false]
+
+4. No additional features unless you include isLibraryFull.
+
+
