@@ -25,7 +25,7 @@ public class Library {
     }
 
     //borrowBook method - searches for the book by its title, checks if it's available, and sets it as borrowed if it is
-    public void borrowBook(String title) {
+    public boolean borrowBook(String title) {
 
         boolean isInLibrary = false;
 
@@ -58,27 +58,23 @@ public class Library {
             //if it's alreaady checked out
             if (libraryArray[index].isBorrowed == true) {
 
-                System.out.println("\n" + title + " has already been checked out.");
+                return false;
 
             } else {
 
                 //if not we set isborrowed to true
                 libraryArray[index].borrowBook();
-                System.out.println("\n" + libraryArray[index].getTitle() + " has been borrowed.");
+                return true;
 
             }
 
-        } else {
-
-            //if it's not in the library
-            System.out.println("\n" + title + " is not in this library.");
-
         }
 
+        return false;
     }
 
     //returnBook method - searches for a book by its title and sets it as returned
-    public void returnBook(String title) {
+    public boolean returnBook(String title) {
 
         boolean isInLibrary = false;
 
@@ -107,36 +103,38 @@ public class Library {
             //if it's not checked out
             if (libraryArray[index].isBorrowed == false) {
 
-                System.out.println("\n" + title + " is not checked out and cannot be returned");
+                return false;
 
             } else {
 
                 //if it's checked out we return it
                 libraryArray[index].returnBook();
-                System.out.println("\n" + libraryArray[index].getTitle() + " has been returned.");
+                return true;
+
             }
 
-        } else {
-
-            System.out.println("\n" + title + " does not belong to this library.");
-
         }
+
+        return false;
 
     }
 
     //list books method - to display all the library books and their current borrow status
-    public void listBooks() {
+    public String listBooks() {
 
         //start with a message
-        System.out.println("\nBooks in the library:");
+        String BigString = "Books in this library:";
 
-        //for each book print its title and borrowed status
+        //for each book add the title and borrowed status etc
         for (Book libraryArray1 : libraryArray) {
             //if it's not null (that could happen if we increase the size of the library
             if (libraryArray1 != null) {
-                System.out.println("    " + libraryArray1.toString());
+                BigString = BigString + "\n    " + libraryArray1.toString();
             }
         }
+
+        //return it for use later
+        return BigString;
 
     }
 
@@ -184,9 +182,6 @@ public class Library {
                 //make the book that spot in the array
                 libraryArray[i] = newBook;
 
-                //say it has been added
-                System.out.println("\n" + newBook.getTitle() + " has been added to the library.");
-
                 //kill the loop after adding the book
                 break;
             }
@@ -200,7 +195,7 @@ public class Library {
 
         //to keep track of where the book is in the index
         int index = 0;
-        
+
         //to keep track if it's in the library
         boolean isInLibrary = false;
 
@@ -208,7 +203,7 @@ public class Library {
         for (int i = 0; i < libraryArray.length; i++) {
 
             if (libraryArray[i] != null) {
-                
+
                 //if any one of the book titles matches the title given, it's in the library
                 if (libraryArray[i].getTitle().equalsIgnoreCase(title)) {
 
@@ -226,12 +221,9 @@ public class Library {
         //if it's in the library we return the book
         if (isInLibrary == true) {
 
-            System.out.println("\nBook found: ");
             return libraryArray[index];
 
         } else {
-
-            System.out.println("\nThere are no books called " + title + " in this library. Search returned: ");
 
             //if not we return null
             return null;
@@ -241,7 +233,9 @@ public class Library {
     }
 
     //searchByAuthor method - returns the book that matches the given author if found
-    public ArrayList searchByAuthor(String author) {
+    public String searchByAuthor(String author) {
+
+        String bigString = "";
 
         //make a new array list to loop through the library and get all the indices of the books together
         ArrayList<Book> worksByAuthor = new ArrayList<>(Arrays.asList());
@@ -261,7 +255,7 @@ public class Library {
 
                     indices.add(i);
 
-                } 
+                }
             }
 
         }
@@ -272,39 +266,28 @@ public class Library {
             for (int i = 0; i < indices.size(); i++) {
 
                 worksByAuthor.add(libraryArray[indices.get(i)]);
+                bigString = bigString + "\n" + worksByAuthor.get(i).getTitle();
 
             }
 
-            //we tell them
-            System.out.println("\nBooks by " + author + ":");
-
-        } else {
-            
-            //tell them no books if not any books
-            System.out.println("\nThere are no books by " + author + " in this library. Search returned:");
-
         }
 
-        //return the list empty or not
-        return worksByAuthor;
+        //return the string
+        return bigString;
 
     }
 
     //countAvailableBooks method - returns the number of books that are currently available in the library
     public int countAvailableBooks() {
 
-        //tracker to see how many books there are
         int numBooks = 0;
 
-        //any time in the array that it's not a null the tracker goes up by one
         for (int i = 0; i < libraryArray.length; i++) {
 
             if (libraryArray[i] != null) {
 
                 if (libraryArray[i].isBorrowed == false) {
-
                     numBooks += 1;
-
                 }
 
             }

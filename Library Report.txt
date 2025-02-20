@@ -1,0 +1,16 @@
+Submission Report: Students should submit a report that includes:
+
+1. A description of the Book and Library classes.
+	Book creates a book with parameters title (string), author(string), and isBorrowed (Boolean). Library creates an array that can be fed a parameter.
+
+
+2. An explanation of the methods implemented, especially the new addBook method.
+	Book methods: Getters of title and author that return their respective fields, borrowBook which turns isBorrowed to true, returnBook which does the opposite, and toString which returns the book's information.
+	Library methods: borrowBook which checks to see if a book is in the library and calls its borrowBook method if it is, returnBook which does the opposite (both check if the action is doable first), listBooks which displays the info of every book in the libraryArray, isLibraryFull which I created to help keep track of the library's fulness, addBook, which checks if the library is full and if it is, copies the libraryArray to a bigger array and adds the book, searchByTitle which returns a book object, searchByAuthor which returns a list of all books by a certain given author, and countAvailable books which returns a the number of check-outable books.
+
+3. Sample input/output from the program.
+	If you input "1984" into the title text field and hit borrow, you will be greeted with a message saying "1984 has been borrowed.
+
+
+4. Any additional features implemented.
+	A quit button.
